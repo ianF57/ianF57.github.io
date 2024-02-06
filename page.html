@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Day</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin-top: -16px;
+    }
+    .bear-img {
+      height: 200px;
+    }
+    .text {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin: 16px 0;
+    }
+    .buttons {
+      margin-top: 16px;
+    }
+    .yes-button {
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .yes-button:hover {
+      background-color: #45a049;
+    }
+    .no-button {
+      background-color: #f44336;
+      color: white;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .no-button:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="bear-img" src="https://media1.tenor.com/m/zSxxXNIJtLUAAAAd/angry-chinese-man-with-gun-shoot-pew-pow-gun-chinese-man-anger.gif" alt="Chinese man with gun">
+    <h1 class="text">Sal jy my valentein wees?</h1>
+    <div class="buttons">
+      <button class="yes-button" id="yesButton">Ja</button>
+      <button class="no-button" id="noButton">Nee</button>
+    </div>
+  </div>
+
+  <script>
+    const yesButton = document.getElementById('yesButton');
+    const noButton = document.getElementById('noButton');
+    const bearImage = document.querySelector('.bear-img');
+    const textElement = document.querySelector('.text');
+  
+    let noCount = 0;
+    let yesPressed = false;
+    let yesButtonSize = 16;
+  
+    function handleNoClick() {
+      noCount++;
+      updateNoButtonText();
+    }
+  
+    function getNoButtonText() {
+      const phrases = [
+        "No",
+        "Is jy seker?",
+        "Rerag seker?",
+        "Probeer weer!",
+        "Laaste kans!",
+        "Rerag?",
+        "Jy sal dalk spyt wees hieroor!",
+        "gee dit nog 'n kansie!",
+        "Is jy absoluut seker?",
+        "hierdie kan 'n fout wees!",
+        "..maar my hart!",
+        "ouch, steeds nie ja nie?",
+        "Watvan nou?",
+        "Sal jy nie heroorweeg nie?",
+        "Is dit jou finale antwoord?",
+        "okay dan, ek gee op",
+      ];
+  
+      return phrases[Math.min(noCount, phrases.length - 1)];
+    }
+  
+    function updateNoButtonText() {
+      const buttonText = getNoButtonText();
+      noButton.textContent = buttonText;
+    }
+  
+    function increaseYesButtonSize() {
+      yesButtonSize = noCount * 20 + 16;
+      yesButton.style.fontSize = `${yesButtonSize}px`;
+    }
+  
+    function jumpNoButton() {
+      const maxX = window.innerWidth - 200; // Adjust for button width
+      const maxY = window.innerHeight - 50; // Adjust for button height
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+      noButton.style.left = `${randomX}px`;
+      noButton.style.top = `${randomY}px`;
+    }
+  
+    yesButton.addEventListener('click', function() {
+      yesPressed = true;
+      bearImage.src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
+      textElement.textContent = "Ok yay!!!";
+    });
+  
+    noButton.addEventListener('click', function() {
+      handleNoClick();
+      jumpNoButton();
+    });
+  
+    // Initially position the button randomly
+    jumpNoButton();
+  </script>
+  
+</body>
+</html>
